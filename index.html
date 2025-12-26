@@ -66,8 +66,10 @@ textarea {
 </style>
 </head>
 
-  <body onclick="enableMusic()">
-
+  <body>
+<audio id="bgmusic" >
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 <button id="playBtn" style="
   padding:15px 25px;
   font-size:18px;
@@ -81,15 +83,26 @@ textarea {
 Tap to Play Music 🎵
 </button>
 
-<audio id="bgmusic" >
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
   <h1>Hey You 🤍</h1>
   <p>I made this only for you.</p>
-  <button onclick="go('p2')">Open 🤍</button>
+  <button onclick="go('p2')">Open 🤍</button >
+  <button id="playBtn" style="
+  padding:14px 28px;
+  font-size:17px;
+  border:none;
+  border-radius:30px;
+  background:#ff5c8a;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+">
+Tap to Play Music 🎵
+</button>
+
 </div>
 
 <!-- PAGE 2 -->
@@ -149,15 +162,6 @@ function sendMsg() {
   });
 }
 
-/* MUSIC UNMUTE ON CLICK */
-let played = false;
-function enableMusic() {
-  if (!played) {
-    const audio = document.getElementById("music");
-    audio.play();
-    played = true;
-  }
-}
 
 /* HEARTS ANIMATION */
 setInterval(() => {
@@ -178,6 +182,7 @@ setInterval(() => {
     btn.style.display = "none";
   });
 </script>
+
 
 </body>
 </html>
