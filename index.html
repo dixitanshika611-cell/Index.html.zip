@@ -66,10 +66,22 @@ textarea {
 </style>
 </head>
 
-<body onclick="enableMusic()">
+  <body onclick="enableMusic()">
 
-<!-- 🎵 MUSIC -->
-<audio id="music" loop preload="auto">>
+<button id="playBtn" style="
+  padding:15px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff5c8a;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+">
+Tap to Play Music 🎵
+</button>
+
+<audio id="bgmusic" >
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -156,6 +168,15 @@ setInterval(() => {
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 6000);
 }, 600);
+</script>
+<script>
+  const btn = document.getElementById("playBtn");
+  const music = document.getElementById("bgMusic");
+
+  btn.addEventListener("click", () => {
+    music.play();
+    btn.style.display = "none";
+  });
 </script>
 
 </body>
