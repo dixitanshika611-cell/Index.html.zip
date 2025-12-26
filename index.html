@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #ffd6e8, #fff);
+  text-align: center;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.page.active {
+  display: flex;
+}
+
+button {
+  padding: 12px 26px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 30px;
+  background: #ff5e8e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff4a7c;
+}
+
+textarea {
+  width: 90%;
+  max-width: 400px;
+  height: 120px;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  resize: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body onclick="enableMusic()">
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+  <source src="https://docs.google.com/uc?export=download&id=1IRLXXW8Uaj4SyZkcaB5GkZh98cYSeciI" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h1>Hey You 🤍</h1>
+  <p>I made this only for you.</p>
+  <button onclick="go('p2')">Open 🤍</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h2>One question…</h2>
+  <p>Do you still care about us?</p>
+  <button onclick="go('p3')">Yes 🤍</button>
+  <button onclick="go('p6')">I'm confused</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h2>“If your heart allows, you can write one thing you feel right now.”💭</h2>
+  <textarea id="msg" placeholder="You can write anything… even just ‘I’m hurt’...."></textarea><br>
+  <button onclick="sendMsg()">Send 🤍</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <h2>I'm Sorry 💞</h2>
+  <p>
+    I accept my mistake fully.<br><br>
+    Reacting to my past cost me your present.<br><br>
+    You are my choice, not my habit.<br><br>
+    If you give me another chance,<br>
+    I’ll value it more than my ego.
+  </p>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <h2>It's okay 🤍</h2>
+  <p>Take your time. I'll wait.</p>
+</div>
+
+<script>
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function sendMsg() {
+  const text = document.getElementById("msg").value;
+  if (!text) {
+    alert("Please write something 🤍");
+    return;
+  }
+
+  fetch("https://formspree.io/f/xwvkpwyb", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: text })
+  }).then(() => {
+    go('p4');
+  }).catch(() => {
+    alert("Oops! Something went wrong. Try again later.");
+  });
+}
+
+/* MUSIC UNMUTE ON CLICK */
+let played = false;
+function enableMusic() {
+  if (!played) {
+    const audio = document.getElementById("music");
+    audio.play();
+    played = true;
+  }
+}
+
+/* HEARTS ANIMATION */
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 600);
+</script>
+
+</body>
+</html>
