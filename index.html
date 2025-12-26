@@ -67,7 +67,7 @@ textarea {
 </head>
 
   <body>
-<audio id="music" >
+<audio id="bgmusic" >
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -155,7 +155,7 @@ function sendMsg() {
 setInterval(() => {
   const h = document.createElement("div");
   h.className = "heart";
-  h.innerHTML = "💖""❤️";
+  h.innerHTML = "❤️";
   h.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 6000);
@@ -163,7 +163,7 @@ setInterval(() => {
 </script>
 <script>
   const btn = document.getElementById("playBtn");
-  const music = document.getElementById("music");
+  const music = document.getElementById("bgmusic");
 
   btn.addEventListener("click", () => {
     music.play();
